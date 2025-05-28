@@ -20,6 +20,7 @@ const rightButtons = computed(() => buttonControl.value?.rightButtons || [])
               :key="'left-button-' + i"
               class="max-w-fit px-7 py-3"
               v-bind="button"
+              @click="button.onClick"
               data-testid="button-control-left-button"
             />
           </div>
@@ -30,6 +31,7 @@ const rightButtons = computed(() => buttonControl.value?.rightButtons || [])
               v-for="(button, i) in rightButtons"
               :key="'right-button-' + i"
               class="max-w-fit px-7 py-3"
+              @click="button.onClick"
               v-bind="button"
             />
           </div>

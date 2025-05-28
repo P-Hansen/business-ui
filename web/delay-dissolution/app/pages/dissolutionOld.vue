@@ -126,8 +126,8 @@ const submitDelay = () => {
 }
 
 // submit and cancel button settings
-onBeforeMount(() => {
-  useRoute().meta.buttonControl = {
+definePageMeta({
+  buttonControl: {
     leftButtons: [
       {
         label: 'Save',
@@ -154,7 +154,6 @@ onBeforeMount(() => {
     ]
   }
 })
-
 
 // text area character counters
 const maxLength = 2000
@@ -380,6 +379,9 @@ feeStore.fees = {
                     {{ characterCount2 }} / {{ maxLength }}
                   </p>
                 </div>
+                <button @click="submitDelay" class="bg-blue-600 text-white px-4 py-2 rounded">
+                  Test Submit
+                </button>
               </div>
             </div>
           </div>
