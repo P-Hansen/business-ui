@@ -15,7 +15,7 @@ const companyPhoneNumber = '(604) 123-4567'
 
 //variables
 // 1. Ledger Detail
-const message = ref('')
+const ledgerDetail = ref('')
 // 2. Optional client email
 const clientEmail = ref('')
 // 3. Certify
@@ -82,7 +82,8 @@ maxDelayDate.setFullYear(maxDelayDate.getFullYear() + 2)
 const maxDate = maxDelayDate.toISOString().split('T')[0]
 
 //backend call
-const submitDelay = () => {
+const submitDelay = async () => {
+  const router = useRouter()
   const payload = {
     companyName,
     incorporationNumber,
@@ -92,7 +93,7 @@ const submitDelay = () => {
     customDate: customDate.value || null, //selected date
 
     // 2.Ledger
-    ledgerDetail: message.value,
+    ledgerDetail: ledgerDetail.value,
 
     // 3.Documents Delivery
     clientEmail: clientEmail.value,
@@ -117,12 +118,15 @@ const submitDelay = () => {
       method: 'POST',
       body: payload
     })
-    console.log('Response:', res)
+    await console.log('Response:', res)
     alert('Submitted successfully')
   } catch (error) {
     console.error('Error submitting delay:', error)
     alert('Failed to submit delay request.')
   }
+
+  router.push('/homeTest')
+
 }
 
 // submit and cancel button settings
@@ -158,7 +162,7 @@ onBeforeMount(() => {
 
 // text area character counters
 const maxLength = 2000
-const characterCount = computed(() => message.value.length)
+const characterCount = computed(() => ledgerDetail.value.length)
 
 const characterCount2 = computed(() => courtOrderDetails.value.length)
 
@@ -279,7 +283,7 @@ feeStore.fees = {
               <div class="form-controls">
                 <div class="input-box">
                   <UTextarea
-                    v-model="message"
+                    v-model="ledgerDetail"
                     :ui="{ base: 'resize-none' }"
                     :maxlength="maxLength"
                     size="xl"
@@ -366,7 +370,7 @@ feeStore.fees = {
                 <div class="input-box">
                   <UInput v-model="courtFileNumber" placeholder="Reference Number" />
                   <br>
-                  <UInput v-model="courtOrderDate" placeholder="Date" />
+                  <DatePicker v-model="courtOrderDate" placeholder="Date" />
                   <br>
                   <UTextarea 
                     v-model="courtOrderDetails"
