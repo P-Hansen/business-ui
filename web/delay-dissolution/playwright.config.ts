@@ -38,11 +38,11 @@ export default defineConfig<ConfigOptions>({
       rootDir: resolve('./')
     },
     actionTimeout: 2000,
-    baseURL: process.env.NUXT_BASE_URL,
+    baseURL: 'http://localhost:3000/en-CA', //process.env.NUXT_BASE_URL,
     trace: 'on-first-retry',
     screenshot: 'off',
     // do not open browser
-    headless: true
+    headless: false
   },
   projects: devicesToTest.map(p => typeof p === 'string' ? ({ name: p, use: devices[p] }) : p)
   // webServer: {

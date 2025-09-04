@@ -24,7 +24,10 @@ const expandableSections = ref([
 ])
 
 const toggleSection = (index: number) => {
-  expandableSections.value[index].open = !expandableSections.value[index].open
+  const section = expandableSections.value[index]
+  if (section) {
+    section.open = !section.open
+  }
 }
 </script>
 
@@ -110,5 +113,6 @@ const toggleSection = (index: number) => {
 
 .section-details {
   margin-left: 34px;
+  max-width: 90%;
 }
 </style>
